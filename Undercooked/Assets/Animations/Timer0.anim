@@ -50,13 +50,13 @@ AnimationClip:
     - time: 18
       value: {fileID: 3887362679015562082, guid: 99221e2a99f77ec4ba6073fd93392abf,
         type: 3}
-    - time: 24.016666
+    - time: 24
       value: {fileID: -3480188812940889722, guid: 99221e2a99f77ec4ba6073fd93392abf,
         type: 3}
     - time: 30
       value: {fileID: -7992032072605076583, guid: 99221e2a99f77ec4ba6073fd93392abf,
         type: 3}
-    - time: 35.983334
+    - time: 36
       value: {fileID: 4618283783279904249, guid: 99221e2a99f77ec4ba6073fd93392abf,
         type: 3}
     - time: 42

@@ -6,8 +6,14 @@ public class ChoppingTable : MonoBehaviour
 {
     public Animator animator;
     public GameManager GM;
+    public SlotManager SM;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        SM = SM.GetComponent<SlotManager>();
+        GM = GM.GetComponent<GameManager>();
+    }
+
     void Update()
     {
         animator.SetBool("IsChopping", GM.isChopping);
@@ -26,8 +32,8 @@ public class ChoppingTable : MonoBehaviour
         }
 
         if (Input.GetButton("Use") && // pressing the use button
-            GM.GetItem() != null && // there is a food 
-            GM.GetFoodObj().IsCuttable()) // the food is cuttable
+            SM.GetItem() != null && // there is a food 
+            SM.GetFoodObj().IsCuttable()) // the food is cuttable
         {
 
             GM.isChopping = true;

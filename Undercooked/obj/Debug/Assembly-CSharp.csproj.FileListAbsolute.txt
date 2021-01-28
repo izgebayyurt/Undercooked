@@ -1,0 +1,2 @@
+/Users/Griezwahlm/Undercooked/Undercooked/obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache
+/Users/Griezwahlm/Undercooked/Undercooked/obj/Debug/Assembly-CSharp.csproj.CoreCompileInputs.cache

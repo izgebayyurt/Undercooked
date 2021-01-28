@@ -5,6 +5,7 @@ using UnityEngine;
 public class Freezer : MonoBehaviour
 {
     public GameManager GM;
+    public SlotManager SM;
 
     public GameObject indicator;
     public GameObject food;
@@ -13,9 +14,11 @@ public class Freezer : MonoBehaviour
     public bool indicatorMove;
     public bool foodMove;
 
+    // Food sprite start & end points
     private Vector3 foodStart;
     private Vector3 foodEnd;
 
+    // Indicator sprite start & end points
     private Vector3 indicatorStart;
     private Vector3 indicatorEnd;
 
@@ -25,6 +28,9 @@ public class Freezer : MonoBehaviour
 
     void Start()
     {
+        SM = SM.GetComponent<SlotManager>();
+        GM = GM.GetComponent<GameManager>();
+
         // Set the transforms of the indicator and food according to the position of the freezer
         indicator.transform.position = transform.position + new Vector3(0.0f, 0.1f, 0.0f);
         food.transform.position = transform.position + new Vector3(0.0f, 0.35f, 0.0f);
@@ -68,9 +74,9 @@ public class Freezer : MonoBehaviour
     private void OnTriggerStay2D(Collider2D col)
     {
 
-        if (use && GM.slots[GM.currentSlot] == null)
+        if (use && GM.slots[GM.GetCurrentSlotIdx()] == null)
         {
-            GM.GetComponent<GameManager>().AddItem(food.GetComponent<SpriteRenderer>().sprite.name);
+            SM.AddItem(food.GetComponent<SpriteRenderer>().sprite.name);
             transform.GetComponent<Animator>().SetBool("IsPickingItem", true);  
         }
 

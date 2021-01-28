@@ -12,12 +12,14 @@ public class Cashier : MonoBehaviour
 
     public bool Serve()
     {
-
+        // if there is a order
         if (OM.orders.Count > 0)
         {
+            // loop over all the orders
             for (int i = 0; i < OM.orders.Count; i++)
             {
 
+                // turn the ui slots into an inventory list which we can loop on
                 List<string> inventory = new List<string>(GM.slots);
   
                 // if the order is bigger than the inventory, move on.
@@ -29,10 +31,15 @@ public class Cashier : MonoBehaviour
                 // If we can find a suitable order, we are going to remove it
                 bool removed = true;
 
+
+
                 for (int j = 0; j < OM.orders[i].GetIngredients().Count; j++)
+                   
                 {
                     removed = inventory.Remove(OM.orders[i].GetIngredients()[j]);
-                    
+
+                    //Debug.Log(removed);
+
                     if (!removed)
                     {
                         break;
@@ -45,25 +52,16 @@ public class Cashier : MonoBehaviour
                 }
                 else
                 {
-                    StartCoroutine(OM.RemoveOrder(i)); // Remove the order i
-                    
+                    // Remove the order i
+                     StartCoroutine(OM.RemoveOrder(i));
+
                     // Add the score
-                    GM.score += OM.orders[i].GetPrice();
+                    GM.ChangeScore(OM.orders[i].GetPrice());
 
                     isServing = true; // Animate it
 
-                    // Remove ingredients from inventory
-                    for (int j = 0; j < OM.orders[i].GetIngredients().Count; j++)
-                    {
-                        for(int k = 0; k < GM.slots.Length; k++)
-                        {
-                            if (OM.orders[i].GetIngredients()[j] == GM.slots[k])
-                            {
-                                GM.slots[k] = null;
-                                break;
-                            }
-                        }
-                    }
+                    // Remove the order's ingredients from the inventory
+                    RemoveIngredients(i);
 
                     // Update inventory UI
                     GM.UpdateInventoryUI();
@@ -123,4 +121,20 @@ public class Cashier : MonoBehaviour
 
         triggerStay = false;
     }
+
+    private void RemoveIngredients(int i){
+        // Remove ingredients from inventory
+        for (int j = 0; j < OM.orders[i].GetIngredients().Count; j++)
+        {
+            for (int k = 0; k < GM.slots.Length; k++)
+            {
+                if (OM.orders[i].GetIngredients()[j] == GM.slots[k])
+                {
+                    GM.slots[k] = null;
+                    break;
+                }
+            }
+        }
+    }
+
 }
