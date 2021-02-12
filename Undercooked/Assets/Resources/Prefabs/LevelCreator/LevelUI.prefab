@@ -2818,7 +2818,6 @@ GameObject:
   - component: {fileID: 4091680789686196211}
   - component: {fileID: 6857800743871035149}
   - component: {fileID: 4822403306933530464}
-  - component: {fileID: 1280730904288967122}
   m_Layer: 0
   m_Name: LevelStart
   m_TagString: Untagged
@@ -2907,19 +2906,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1280730904288967122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8317870162586004238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daa3a457f4286466eae897eaeeff73ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GM: {fileID: 0}
 --- !u!1 &8636190505353942948
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,9 +5,13 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    // Player
+    public GameObject player;
+
     // Managers 
     public GameObject SlotManager;
     private SlotManager SM;
+    public GameObject OrderManager;
 
     // Inventory Management
     private int currentSlot = 0;
@@ -35,12 +39,12 @@ public class GameManager : MonoBehaviour
     private TMP_Text cashText;
 
     // UI Management for overlays etc.
-    public Transform LevelUI;
-    private Transform UI_HUD;
-    private Transform UI_Overlays;
-    private Transform UI_PauseMenu;
-    private Transform UI_LevelStart;
-    private Transform UI_LevelEnd;
+    public GameObject LevelUI;
+    private GameObject UI_HUD;
+    private GameObject UI_Overlays;
+    private GameObject UI_PauseMenu;
+    private GameObject UI_LevelStart;
+    private GameObject UI_LevelEnd;
 
 
     void Awake()
@@ -48,11 +52,14 @@ public class GameManager : MonoBehaviour
         PauseGame(); // Start the level as paused
 
         // Get the UI elements
-        UI_HUD = LevelUI.Find("HUD");
-        UI_Overlays = LevelUI.Find("Overlays");
-        UI_PauseMenu = UI_Overlays.Find("PauseMenu");
-        UI_LevelStart = UI_Overlays.Find("LevelStart");
-        UI_LevelEnd = UI_Overlays.Find("LevelEnd");
+        UI_HUD = LevelUI.transform.Find("HUD").gameObject;
+        UI_Overlays = LevelUI.transform.Find("Overlays").gameObject; 
+        UI_PauseMenu = UI_Overlays.transform.Find("PauseMenu").gameObject;
+        UI_LevelStart = UI_Overlays.transform.Find("LevelStart").gameObject;
+        UI_LevelEnd = UI_Overlays.transform.Find("LevelEnd").gameObject;
+
+        // Enable level start panel
+        UI_LevelStart.SetActive(true);
 
         // Get the SlotManager
         SM = SlotManager.GetComponent<SlotManager>();
@@ -71,9 +78,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (remainingLevelTime >= 0){
-            remainingLevelTime -= Time.deltaTime;
-        }
+        UpdateGameTime();
+
+        // Press any key to start the game
         if (UI_LevelStart.gameObject.activeSelf && Input.anyKey){
             UI_LevelStart.gameObject.SetActive(false);
             ResumeGame();
@@ -188,6 +195,28 @@ public class GameManager : MonoBehaviour
         {
             UI_PauseMenu.gameObject.SetActive(true);
         }
+    }
+
+    // Updates the game time, if it reaches zero takes action
+    public void UpdateGameTime()
+    {
+        if (remainingLevelTime >= 0)
+        {
+            remainingLevelTime -= Time.deltaTime;
+        }
+        else
+        {
+            EndLevel();
+        }
+    }
+
+    public void EndLevel()
+    {
+        // Pause game actions
+        player.GetComponent<PlayerMovement>().enabled = false;
+        player.GetComponent<Animator>().enabled = false;
+        OrderManager.SetActive(false);
+        UI_LevelEnd.SetActive(true); // Enable level end panel
     }
 
 

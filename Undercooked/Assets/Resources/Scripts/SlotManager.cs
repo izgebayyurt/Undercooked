@@ -100,11 +100,11 @@ public class SlotManager : MonoBehaviour
         {
             if (GM.slots[i] == null)
             {
-                transform.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f);
                 transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite = null;
+                transform.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f);
             } else {
-                transform.GetChild(GM.GetCurrentSlotIdx()).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
                 transform.GetChild(GM.GetCurrentSlotIdx()).GetChild(0).GetComponent<Image>().sprite = GM.GetFoodSprite();
+                transform.GetChild(GM.GetCurrentSlotIdx()).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
             }
         }
     }

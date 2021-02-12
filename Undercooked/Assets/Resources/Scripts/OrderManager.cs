@@ -77,6 +77,8 @@ public class OrderManager : MonoBehaviour
 
     public IEnumerator RemoveOrder(int orderIndex)
     {
+        // Debug.Log(orderIndex);
+
         //if(actionHappening){
         //    yield return new WaitForSeconds(0.01f);
         //}
